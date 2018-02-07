@@ -32,39 +32,39 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         viewModel= ViewModelProviders.of(this).get(MyActivityViewModel.class);
-       // getSupportFragmentManager().beginTransaction().add(R.id.framelayout,new AFragment()).add(R.id.framelayout,new BFragment()).
-         //       commit();
+       //
+        if(findViewById(R.id.afragment)==null) {
+            viewPager = (ViewPager) findViewById(R.id.viewpager);
+            viewPager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
+                @Override
+                public Fragment getItem(int position) {
 
-        viewPager=(ViewPager)findViewById(R.id.viewpager);
-        viewPager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
-            @Override
-            public Fragment getItem(int position) {
+                    Fragment fragment;
 
-                Fragment fragment;
-
-                switch (position){
+                    switch (position) {
 
 
-                    case 0:
-                        fragment= new AFragment();
+                        case 0:
+                            fragment = new AFragment();
 
-                        break;
+                            break;
 
-                    case 1:
-                        fragment=new BFragment();
-                        break;
+                        case 1:
+                            fragment = new BFragment();
+                            break;
 
-                    default:
-                            fragment=new AFragment();
+                        default:
+                            fragment = new AFragment();
+                    }
+                    return fragment;
                 }
-                return fragment;
-            }
 
-            @Override
-            public int getCount() {
-                return 2;
-            }
-        });
+                @Override
+                public int getCount() {
+                    return 2;
+                }
+            });
+       }
 
        // getFragmentManager().beginTransaction().attach(getFragmentManager().getFragments().get(0)).commit();
         //viewModel.getAnimal().observe(this,animal);
