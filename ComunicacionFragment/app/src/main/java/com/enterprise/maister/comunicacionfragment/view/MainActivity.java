@@ -15,6 +15,8 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.enterprise.maister.comunicacionfragment.R;
+import com.enterprise.maister.comunicacionfragment.model.database.AnimalesDatabase;
+import com.enterprise.maister.comunicacionfragment.model.entidades.Animal;
 import com.enterprise.maister.comunicacionfragment.viewmodel.MyActivityViewModel;
 /*
 *
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        AnimalesDatabase.getINSTANCIA(this).animalDAO().insertarAnimales(new Animal());
         viewModel= ViewModelProviders.of(this).get(MyActivityViewModel.class);
        //
         if(findViewById(R.id.afragment)==null) {

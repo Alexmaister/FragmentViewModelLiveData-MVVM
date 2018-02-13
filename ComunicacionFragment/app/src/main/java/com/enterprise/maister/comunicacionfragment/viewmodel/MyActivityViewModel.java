@@ -1,11 +1,20 @@
 package com.enterprise.maister.comunicacionfragment.viewmodel;
 
+import android.arch.lifecycle.ComputableLiveData;
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.arch.persistence.room.Room;
+import android.arch.persistence.room.RoomDatabase;
+import android.content.Context;
 
 import com.enterprise.maister.comunicacionfragment.DAL.REPOSITORIO;
+import com.enterprise.maister.comunicacionfragment.model.daos.AnimalDAO;
+import com.enterprise.maister.comunicacionfragment.model.database.AnimalesDatabase;
+import com.enterprise.maister.comunicacionfragment.model.entidades.Animal;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by maister on 6/02/18.
@@ -13,41 +22,38 @@ import java.util.ArrayList;
 
 public class MyActivityViewModel extends ViewModel {
 
-    public MyActivityViewModel() {
+/*    public MyActivityViewModel() {
         animal=new MutableLiveData<>();
-        animal.setValue(Integer.valueOf(1));
+        ((MutableLiveData)animal).setValue(Integer.valueOf(1));
         nombreanimales=new MutableLiveData<>();
-        nombreanimales.setValue(REPOSITORIO.nombreanimales);
-    }
+        ((MutableLiveData)nombreanimales).setValue(REPOSITORIO.nombreanimales);
+    }*/
 
-    @Override
-    protected void onCleared() {
-        super.onCleared();
-    }
 
-    private MutableLiveData<ArrayList<String>> nombreanimales;
+    private LiveData<ArrayList<String>> nombreanimales;
 
 
 
-    private MutableLiveData<Integer> animal;
+    private LiveData<Integer> animal;
 
 
-    public MutableLiveData<Integer> getAnimal() {
+    public LiveData<Integer> getAnimal() {
 
         if(animal==null){
 
             animal=new MutableLiveData<>();
-            animal.setValue(Integer.valueOf(1));
+            ((MutableLiveData)animal).setValue(Integer.valueOf(1));
         }
         return animal;
     }
-    public MutableLiveData<ArrayList<String>> getnombreAnimales(){
+    public LiveData<ArrayList<String>> getnombreAnimales(Context context){
 
       if(nombreanimales==null){
 
           nombreanimales=new MutableLiveData<>();
-          nombreanimales.setValue(REPOSITORIO.nombreanimales);
+          ((MutableLiveData)nombreanimales).setValue(AnimalesDatabase.getINSTANCIA(context).animalDAO().cargarNombreAnimales());
       }
+
 
       return nombreanimales;
     }

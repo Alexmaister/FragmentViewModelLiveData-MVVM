@@ -51,6 +51,6 @@ public class BFragment extends Fragment {
 
     private void cambiarVista(int i){
 
-        ((TextView)this.getActivity().findViewById(R.id.raza)).setText(viewModel.getnombreAnimales().getValue().get(i)+i);
+        ((TextView)this.getActivity().findViewById(R.id.raza)).setText(viewModel.getnombreAnimales(this.getContext()).getValue().get(i)+i);
     }
 }
