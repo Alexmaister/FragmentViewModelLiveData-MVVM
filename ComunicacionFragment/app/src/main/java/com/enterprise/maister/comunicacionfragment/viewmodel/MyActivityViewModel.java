@@ -30,7 +30,7 @@ public class MyActivityViewModel extends ViewModel {
     }*/
 
 
-    private LiveData<ArrayList<String>> nombreanimales;
+    private LiveData<List<String>> nombreanimales;
 
 
 
@@ -42,16 +42,16 @@ public class MyActivityViewModel extends ViewModel {
         if(animal==null){
 
             animal=new MutableLiveData<>();
-            ((MutableLiveData)animal).setValue(Integer.valueOf(1));
+            ((MutableLiveData)animal).setValue(Integer.valueOf(0));
         }
         return animal;
     }
-    public LiveData<ArrayList<String>> getnombreAnimales(Context context){
+    public LiveData<List<String>> getnombreAnimales(Context context){
 
       if(nombreanimales==null){
 
-          nombreanimales=new MutableLiveData<>();
-          ((MutableLiveData)nombreanimales).setValue(AnimalesDatabase.getINSTANCIA(context).animalDAO().cargarNombreAnimales());
+
+         nombreanimales=AnimalesDatabase.getINSTANCIA(context).animalDAO().cargarNombreAnimales();
       }
 
 

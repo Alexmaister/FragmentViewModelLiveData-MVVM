@@ -18,6 +18,7 @@ import com.enterprise.maister.comunicacionfragment.R;
 import com.enterprise.maister.comunicacionfragment.viewmodel.MyActivityViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by maister on 6/02/18.
@@ -26,12 +27,20 @@ import java.util.ArrayList;
 public class BFragment extends Fragment {
 
     MyActivityViewModel viewModel;
-
+    List<String> nombreanimales=new ArrayList<>();
     final Observer<Integer> animal=new Observer<Integer>() {
         @Override
         public void onChanged(@Nullable Integer integer) {
 
             cambiarVista(integer);
+        }
+    };
+
+    final Observer<List<String>> _nombreanimales=new Observer<List<String>>() {
+        @Override
+        public void onChanged(@Nullable List<String> strings) {
+
+            nombreanimales=strings;
         }
     };
     @Override
@@ -51,6 +60,7 @@ public class BFragment extends Fragment {
 
     private void cambiarVista(int i){
 
-        ((TextView)this.getActivity().findViewById(R.id.raza)).setText(viewModel.getnombreAnimales(this.getContext()).getValue().get(i)+i);
+        if(nombreanimales.size()>0)
+        ((TextView)this.getActivity().findViewById(R.id.raza)).setText(nombreanimales.get(i));
     }
 }

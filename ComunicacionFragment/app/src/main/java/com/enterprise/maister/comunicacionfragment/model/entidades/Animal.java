@@ -24,6 +24,7 @@ public class Animal {
         id=contador_id++;
         tipo="mamifero";
         especie="perro";
+        nombre="miperro";
         raza="Golden Retriever";
     }
 

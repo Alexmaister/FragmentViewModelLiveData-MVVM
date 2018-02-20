@@ -14,7 +14,7 @@ import com.enterprise.maister.comunicacionfragment.model.entidades.Animal;
 /**
  * Created by maister on 13/02/18.
  */
-@Database(version=1,entities={Animal.class})
+@Database(version=2,entities={Animal.class})
 public abstract class AnimalesDatabase extends RoomDatabase {
 
     private static AnimalesDatabase INSTANCIA;
@@ -28,7 +28,7 @@ public abstract class AnimalesDatabase extends RoomDatabase {
 
                 if (INSTANCIA==null){
 
-                    INSTANCIA=Room.databaseBuilder(context.getApplicationContext(),AnimalesDatabase.class,"animales_database").allowMainThreadQueries().build();
+                    INSTANCIA=Room.databaseBuilder(context.getApplicationContext(),AnimalesDatabase.class,"animales_database").allowMainThreadQueries().fallbackToDestructiveMigration().build();
                 }
 
             }
