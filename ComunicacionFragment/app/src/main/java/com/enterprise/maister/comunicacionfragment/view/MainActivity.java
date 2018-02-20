@@ -9,7 +9,9 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.support.v4.view.PagerAdapter;
+
 import android.support.v4.view.ViewPager;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -35,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
         AnimalesDatabase.getINSTANCIA(this).animalDAO().insertarAnimales(new Animal());
         viewModel= ViewModelProviders.of(this).get(MyActivityViewModel.class);
        //
-        if(findViewById(R.id.afragment)==null) {
+
+        if(getResources().getConfiguration().orientation==1) {
             viewPager = (ViewPager) findViewById(R.id.viewpager);
             viewPager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
                 @Override
@@ -66,9 +69,23 @@ public class MainActivity extends AppCompatActivity {
                     return 2;
                 }
             });
-       }
+        }else{
 
+            FragmentManager manejador = getSupportFragmentManager();
+            FragmentTransaction transaction = manejador.beginTransaction();
+            transaction.replace(R.id.afragment,new AFragment());
+            transaction.replace(R.id.bfragment,new BFragment());
+            transaction.commit();
+            //esta en landscape
+        }
        // getFragmentManager().beginTransaction().attach(getFragmentManager().getFragments().get(0)).commit();
         //viewModel.getAnimal().observe(this,animal);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
     }
 }

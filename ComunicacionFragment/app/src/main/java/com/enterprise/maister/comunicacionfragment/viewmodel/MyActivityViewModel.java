@@ -1,5 +1,7 @@
 package com.enterprise.maister.comunicacionfragment.viewmodel;
 
+import android.app.Application;
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.ComputableLiveData;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
@@ -20,7 +22,7 @@ import java.util.List;
  * Created by maister on 6/02/18.
  */
 
-public class MyActivityViewModel extends ViewModel {
+public class MyActivityViewModel extends AndroidViewModel {
 
 /*    public MyActivityViewModel() {
         animal=new MutableLiveData<>();
@@ -29,6 +31,11 @@ public class MyActivityViewModel extends ViewModel {
         ((MutableLiveData)nombreanimales).setValue(REPOSITORIO.nombreanimales);
     }*/
 
+ public MyActivityViewModel(Application app){
+     super(app);
+
+
+ }
 
     private LiveData<List<String>> nombreanimales;
 
@@ -46,12 +53,12 @@ public class MyActivityViewModel extends ViewModel {
         }
         return animal;
     }
-    public LiveData<List<String>> getnombreAnimales(Context context){
+    public LiveData<List<String>> getnombreAnimales(){
 
       if(nombreanimales==null){
 
 
-         nombreanimales=AnimalesDatabase.getINSTANCIA(context).animalDAO().cargarNombreAnimales();
+         nombreanimales=AnimalesDatabase.getINSTANCIA(this.getApplication().getApplicationContext()).animalDAO().cargarNombreAnimales();
       }
 
 

@@ -8,21 +8,16 @@ android:layout_height="match_parent"
 tools:context="com.enterprise.maister.comunicacionfragment.view.MainActivity"
     android:orientation="horizontal">
 
-
-
-
-<fragment
-    class="com.enterprise.maister.comunicacionfragment.view.AFragment"
+<FrameLayout
     android:id="@+id/afragment"
     android:layout_width="0dp"
     android:layout_height="match_parent"
-    android:layout_weight="50"></fragment>
+    android:layout_weight="50"/>
 
-    <fragment
-        class="com.enterprise.maister.comunicacionfragment.view.BFragment"
+<FrameLayout
         android:id="@+id/bfragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="50"></fragment>
+        android:layout_weight="50"/>
 
 </LinearLayout>

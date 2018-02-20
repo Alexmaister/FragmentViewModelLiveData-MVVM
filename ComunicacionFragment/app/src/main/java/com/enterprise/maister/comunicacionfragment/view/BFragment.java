@@ -8,7 +8,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+
+
 import android.support.v4.app.FragmentActivity;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,15 +30,17 @@ import java.util.List;
 public class BFragment extends Fragment {
 
     MyActivityViewModel viewModel;
-    List<String> nombreanimales=new ArrayList<>();
+
     final Observer<Integer> animal=new Observer<Integer>() {
         @Override
         public void onChanged(@Nullable Integer integer) {
 
             cambiarVista(integer);
+
         }
     };
 
+    List<String> nombreanimales;
     final Observer<List<String>> _nombreanimales=new Observer<List<String>>() {
         @Override
         public void onChanged(@Nullable List<String> strings) {
@@ -43,6 +48,13 @@ public class BFragment extends Fragment {
             nombreanimales=strings;
         }
     };
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
@@ -52,15 +64,23 @@ public class BFragment extends Fragment {
     }
 
     @Override
+    public void onAttachFragment(Fragment childFragment) {
+        super.onAttachFragment(childFragment);
+
+
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         viewModel= ViewModelProviders.of((FragmentActivity) getActivity()).get(MyActivityViewModel.class);
-        viewModel.getAnimal().observe((LifecycleOwner) getActivity(),animal);
+        viewModel.getAnimal().observe((LifecycleOwner) this,animal);
+        viewModel.getnombreAnimales().observe((LifecycleOwner) this,_nombreanimales);
     }
 
     private void cambiarVista(int i){
 
-        if(nombreanimales.size()>0)
+        if(nombreanimales!=null)
         ((TextView)this.getActivity().findViewById(R.id.raza)).setText(nombreanimales.get(i));
     }
 }
